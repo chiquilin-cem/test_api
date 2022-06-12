@@ -14,7 +14,7 @@ class ProductoGateway {
     {
         $statement = "
             SELECT 
-                id, nombre, sku, marca, costo, categoria_id
+                id, nombre, sku, marca, costo
             FROM
                 producto;
         ";
@@ -32,7 +32,7 @@ class ProductoGateway {
     {
         $statement = "
             SELECT 
-                id, nombre, sku, marca, costo, categoria_id
+                id, nombre, sku, marca, costo
             FROM
                 producto
             WHERE id = ?;
@@ -52,9 +52,9 @@ class ProductoGateway {
     {
         $statement = "
             INSERT INTO producto 
-                (nombre, sku, marca, costo, categoria_id)
+                (nombre, sku, marca, costo)
             VALUES
-                (:nombre, :sku, :marca, :costo, :categoria_id);
+                (:nombre, :sku, :marca, :costo);
         ";
 
         try {
@@ -64,7 +64,6 @@ class ProductoGateway {
                 'sku'  => $input['sku'],
                 'marca' => $input['marca'],
                 'costo' => $input['costo'],
-                'categoria_id' => $input['categoria_id'] ?? null,
             ));
             return $statement->rowCount();
         } catch (\PDOException $e) {
@@ -80,8 +79,7 @@ class ProductoGateway {
                 nombre = :nombre,
                 sku  = :sku,
                 marca = :marca,
-                costo = :costo,
-                categoria_id = :categoria_id
+                costo = :costo
             WHERE id = :id;
         ";
 
@@ -93,7 +91,6 @@ class ProductoGateway {
                 'sku'  => $input['sku'],
                 'marca' => $input['marca'],
                 'costo' => $input['costo'],
-                'categoria_id' => $input['categoria_id'] ?? null,
             ));
             return $statement->rowCount();
         } catch (\PDOException $e) {

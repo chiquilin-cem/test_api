@@ -1,4 +1,6 @@
-name: almacen
+name: almacen3
 recipe: lamp
 config:
-  webroot: .
+  webroot: public
+  php: 7.4
+  database: 'mysql:5.7'
