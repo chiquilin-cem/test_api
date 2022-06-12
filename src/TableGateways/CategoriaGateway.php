@@ -1,5 +1,5 @@
 <?php
-namespace Src\TableGateways;
+namespace Src\tableGateways;
 
 class CategoriaGateway {
 

@@ -1,7 +1,7 @@
 <?php
 require "../bootstrap.php";
-use Src\Controller\ProductoController;
-use Src\Controller\CategoriaController;
+use Src\controller\ProductoController;
+use Src\controller\CategoriaController;
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -10,9 +10,10 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+echo "Estamos en: ".$uri."\n";
 $uri = explode( '/', $uri );
 
-// all of our endpoints start with /person
+// all of our endpoints start with /producto
 // everything else results in a 404 Not Found
 if ($uri[1] !== 'producto') {
     echo "Entrando Aqui 1";
@@ -20,7 +21,7 @@ if ($uri[1] !== 'producto') {
     //exit();
 }
 
-// the user id is, of course, optional and must be a number:
+// the producto id is, of course, optional and must be a number:
 $productoId = null;
 if (isset($uri[2])) {
     $productoId = (int) $uri[2];

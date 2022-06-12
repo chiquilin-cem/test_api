@@ -1,7 +1,7 @@
 <?php
-namespace Src\Controller;
+namespace Src\controller;
 
-use Src\TableGateways\categoriaGateway;
+use Src\tableGateways\categoriaGateway;
 
 class categoriaController {
 

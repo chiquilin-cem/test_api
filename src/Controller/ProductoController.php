@@ -1,7 +1,7 @@
 <?php
 namespace Src\Controller;
 
-use Src\TableGateways\productoGateway;
+use Src\tableGateways\productoGateway;
 
 class productoController {
 
