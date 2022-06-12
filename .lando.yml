@@ -1,0 +1,4 @@
+name: almacen
+recipe: lamp
+config:
+  webroot: .

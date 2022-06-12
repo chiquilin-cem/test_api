@@ -1,0 +1,17 @@
+CREATE TABLE producto (
+    id INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    sku INT NOT NULL,
+    marca VARCHAR(100) NOT NULL,
+    costo DECIMAL(10,2),
+    categoria_id INT,
+    PRIMARY KEY (id)
+) ENGINE=INNODB;
+
+CREATE TABLE categoria (
+    id INT NOT NULL AUTO_INCREMENT,
+    categoria_nombre VARCHAR(100) NOT NULL,
+    categoria_atributo VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE=INNODB;
+
