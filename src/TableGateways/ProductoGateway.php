@@ -12,11 +12,21 @@ class ProductoGateway {
 
     public function findAll()
     {
+        //Se mostrará el precio de venta, aplicando los siguientes márgenes de utilidad: 
+        //Televisor 35%, Laptops 40% y Zapatos 30%. Estos porcentajes estarán definidos en el código fuente.
         $statement = "
             SELECT 
-                id, nombre, sku, marca, costo
+                a.id id, a.nombre nombre, a.sku sku, a.marca marca, a.costo costo, b.categoria_nombre categoria_nombre, b.categoria_atributo categoria_atributo, 
+                case 
+                    when a.nombre like '%Televisor%' then (a.costo*1.35)
+                    when a.nombre like '%Laptop%' then (a.costo*1.4)
+                    when a.nombre like '%Zapato%' then (a.costo*1.3)
+                end as precio
             FROM
-                producto;
+                producto a, categoria b, prodcat c
+            WHERE
+                a.id = c.producto_id AND
+                b.id = c.categoria_id;
         ";
 
         try {
@@ -31,11 +41,18 @@ class ProductoGateway {
     public function find($id)
     {
         $statement = "
-            SELECT 
-                id, nombre, sku, marca, costo
+                SELECT 
+                a.id id, a.nombre nombre, a.sku sku, a.marca marca, a.costo costo, b.categoria_nombre categoria_nombre, b.categoria_atributo categoria_atributo, 
+                case 
+                    when a.nombre like '%Televisor%' then (a.costo*1.35)
+                    when a.nombre like '%Laptop%' then (a.costo*1.4)
+                    when a.nombre like '%Zapato%' then (a.costo*1.3)
+                end as precio
             FROM
-                producto
-            WHERE id = ?;
+                producto a, categoria b, prodcat c
+            WHERE
+                a.id = c.producto_id AND
+                b.id = c.categoria_id AND id = ?;
         ";
 
         try {
@@ -63,7 +80,7 @@ class ProductoGateway {
                 'nombre' => $input['nombre'],
                 'sku'  => $input['sku'],
                 'marca' => $input['marca'],
-                'costo' => $input['costo'],
+                'costo' => $input['costo']
             ));
             return $statement->rowCount();
         } catch (\PDOException $e) {
@@ -90,7 +107,7 @@ class ProductoGateway {
                 'nombre' => $input['nombre'],
                 'sku'  => $input['sku'],
                 'marca' => $input['marca'],
-                'costo' => $input['costo'],
+                'costo' => $input['costo']
             ));
             return $statement->rowCount();
         } catch (\PDOException $e) {

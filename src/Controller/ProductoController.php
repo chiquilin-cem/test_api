@@ -7,15 +7,15 @@ class productoController {
 
     private $db;
     private $requestMethod;
-    private $userId;
+    private $productoId;
 
     private $productoGateway;
 
-    public function __construct($db, $requestMethod, $userId)
+    public function __construct($db, $requestMethod, $productoId)
     {
         $this->db = $db;
         $this->requestMethod = $requestMethod;
-        $this->userId = $userId;
+        $this->productoId = $productoId;
 
         $this->productoGateway = new productoGateway($db);
     }
@@ -24,8 +24,8 @@ class productoController {
     {
         switch ($this->requestMethod) {
             case 'GET':
-                if ($this->userId) {
-                    $response = $this->getProducto($this->userId);
+                if ($this->productoId) {
+                    $response = $this->getProducto($this->productoId);
                 } else {
                     $response = $this->getAllProductos();
                 };
@@ -34,10 +34,10 @@ class productoController {
                 $response = $this->createProductoFromRequest();
                 break;
             case 'PUT':
-                $response = $this->updateProductoFromRequest($this->userId);
+                $response = $this->updateProductoFromRequest($this->productoId);
                 break;
             case 'DELETE':
-                $response = $this->deleteProducto($this->userId);
+                $response = $this->deleteProducto($this->productoId);
                 break;
             default:
                 $response = $this->notFoundResponse();
