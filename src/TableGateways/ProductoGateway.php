@@ -40,6 +40,7 @@ class ProductoGateway {
 
     public function find($id)
     {
+        echo "Validamos el id: ".$id;
         $statement = "
                 SELECT 
                 a.id id, a.nombre nombre, a.sku sku, a.marca marca, a.costo costo, b.categoria_nombre categoria_nombre, b.categoria_atributo categoria_atributo, 
@@ -52,13 +53,14 @@ class ProductoGateway {
                 producto a, categoria b, prodcat c
             WHERE
                 a.id = c.producto_id AND
-                b.id = c.categoria_id AND id = ?;
+                b.id = c.categoria_id AND a.id = ?;
         ";
 
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute(array($id));
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            print_r ($result);
             return $result;
         } catch (\PDOException $e) {
             exit($e->getMessage());

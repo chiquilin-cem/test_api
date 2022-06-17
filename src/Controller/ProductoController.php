@@ -34,6 +34,7 @@ class productoController {
                 $response = $this->createProductoFromRequest();
                 break;
             case 'PUT':
+                echo "Put call";
                 $response = $this->updateProductoFromRequest($this->productoId);
                 break;
             case 'DELETE':
@@ -82,6 +83,7 @@ class productoController {
 
     private function updateProductoFromRequest($id)
     {
+        echo "Validamos el id: ".$id;
         $result = $this->productoGateway->find($id);
         if (! $result) {
             return $this->notFoundResponse();
@@ -90,6 +92,7 @@ class productoController {
         if (! $this->validateproducto($input)) {
             return $this->unprocessableEntityResponse();
         }
+        echo "Validado vamos a modiciar";
         $this->productoGateway->update($id, $input);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
